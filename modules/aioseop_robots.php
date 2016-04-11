@@ -40,6 +40,16 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 					'Submit_Preview' => Array( 'type' => 'submit', 'class' => 'button-primary MRL', 'name' => __( 'Add Rule', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1 ),
 					'Submit_Update' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Save Robots.txt File', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1 ),
 					'Submit_Delete' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Delete Robots.txt File', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1 ),
+					
+					/*
+					 *Edits starts for adding robots.txt button by nishant 
+					 */
+					'View_Robots'		=> Array( 'type' => 'html', 'label' => 'none',
+										  'default' => __( '<a href="'.site_url().'/robots.txt" class="button-primary test" target ="_blank" >View Robots.txt File</a>' ),
+										  'save' => false,'nowrap' => 1 ),
+					/*
+					 *Edits ends for adding robots.txt button by nishant 
+					 */					  
 					'optusage'		=> Array( 'type' => 'html', 'label' => 'none',
 										  'default' => __( 'Click the Optimize button below and All in One SEO Pack will analyze your Robots.txt file to make sure it complies with the standards for Robots.txt files.  The results will be displayed in a table below.', 'all-in-one-seo-pack' ),
 										  'save' => false ),
@@ -51,17 +61,22 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 			if ( !empty( $help_text ) )
 				foreach( $help_text as $k => $v )
 					$this->default_options[$k]['help_text'] = $v;
-			
+			/*
+			 *Edits starts for adding robots.txt button by nishant 
+			 */
 			$this->locations = array(	'generator' => Array(	'name' => "Robots.txt", 'type' => 'settings',
-																'options' => Array( 'usage', 'additional', 'useragent', 'path', 'Submit_Preview', 'Submit_Update', 'Submit_Delete', 'robotgen', 'optusage', 'Submit_Opt_Update', 'Submit_Opt_Preview', 'Submit_Optimize' ) ),
+																'options' => Array( 'usage', 'additional', 'useragent', 'path', 'Submit_Preview', 'Submit_Update', 'Submit_Delete', 'View_Robots', 'robotgen', 'optusage', 'Submit_Opt_Update', 'Submit_Opt_Preview', 'Submit_Optimize' ) ),
 								);
-
+					
 			$this->layout = Array(
 				'default' => Array(
 						'name' => __( 'Create a Robots.txt File', 'all-in-one-seo-pack' ),
-						'options' => Array( 'usage', 'additional', 'useragent', 'path', 'Submit_Preview', 'Submit_Update', 'Submit_Delete', 'robotgen' ) // this is set below, to the remaining options -- pdb
+						'options' => Array( 'usage', 'additional', 'useragent', 'path', 'Submit_Preview', 'Submit_Update', 'Submit_Delete', 'View_Robots', 'robotgen' ) // this is set below, to the remaining options -- pdb
 					)
 				);
+			/*
+			 *Edits ends for adding robots.txt button by nishant 
+			 */	
 			$this->layout['optimize']  = Array(
 					'name' => __( 'Optimize your Robots.txt File', 'all-in-one-seo-pack' ),
 					'options' => Array( 'optusage', 'Submit_Optimize' )
@@ -162,6 +177,8 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 					} else {
 						$options[$prefix . 'robothtml'] = $this->annotate_robots_html( $file, true, __( "Current File", 'all-in-one-seo-pack' ) );
 					}
+					
+		
 			}
 			return $options;
 		}
