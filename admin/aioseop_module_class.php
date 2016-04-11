@@ -1548,14 +1548,16 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 			if ( $options['type'] == 'custom' )
 				return apply_filters( "{$prefix}output_option", '', $args );				
 			if ( in_array( $options['type'], Array( 'multiselect', 'select', 'multicheckbox', 'radio', 'checkbox', 'textarea', 'text', 'submit', 'hidden' ) ) && ( is_string( $value ) ) )
-				$value = esc_attr( $value );
+				$value =  html_entity_decode(esc_attr( $value ));
 			$buf = '';
 			$onload = '';
 			if ( !empty( $options['count'] ) ) {
 				$n++;
-				$attr .= " onKeyDown='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n)' onKeyUp='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n)'";
-				$onload = "if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n);";
+				$attr .= " onKeyDown='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name.text(),document.{$this->form}.{$prefix}length$n)' onKeyUp='if (typeof countChars == \"function\") countChars(document.{$this->form}.$name,document.{$this->form}.{$prefix}length$n)'";
+				$onload = "if (typeof countChars == \"function\") countChars(document.{$this->form}.$name..text(),document.{$this->form}.{$prefix}length$n);";
+				//print_r($onload); exit;
 			}
+
 			if ( isset( $opts['id'] ) ) $attr .= " id=\"{$opts['id']}\" ";
 			switch ( $options['type'] ) {
 				case 'multiselect':   $attr .= ' MULTIPLE';
@@ -1572,7 +1574,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 											  "<input class='aioseop_upload_image_label' name='$name' type='text' $attr value='$value' size=57 style='float:left;clear:left;'>\n";
 									  break;
 				case 'html':		  $buf .= $value; break;
-				default:			  $buf .= "<input name='$name' type='{$options['type']}' $attr value='$value'>\n";
+				default:			  $buf .= "<input name='$name' class='' type='{$options['type']}' $attr value='$value'>\n";
 			}
 			if ( !empty( $options['count'] ) ) {
 				$size = 60;

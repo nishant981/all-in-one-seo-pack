@@ -30,7 +30,32 @@ function countChars(field,cntfield) {
 		extra = aiosp_title_extra;
 	}
 	
-	cntfield.value = field.value.length + extra;
+	var vv = cntfield.value.trim();
+	
+	/*
+	*Edits starts for change the extra count by nishant 
+	 */
+	field.value = (field.value.trim()).replace(/^\\s*/g,'');
+	var check_val = field.value;
+
+	if(check_val=='')
+	{
+		cntfield.value = (field.value.trim()).length + extra;
+	}
+	else
+	{
+		cntfield.value = (field.value.trim()).length;
+	}
+	/*
+	*Edits ends for change the extra count by nishant 
+	 */		
+
+
+	
+	
+    //cntfield.value = field.value.length;
+	
+
 	if ( typeof field.size != 'undefined' ) {
 		field_size = field.size;
 	} else {
