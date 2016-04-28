@@ -93,3 +93,31 @@ if ( AIOSEOPPRO ) {
 }
 
 // eof
+
+add_action('admin_menu', 'welcome_screen_pages');
+
+function welcome_screen_pages() {
+  add_dashboard_page(
+    'Welcome To Welcome Screen',
+    'Welcome To Welcome Screen',
+    'read',
+    'welcome-screen-about',
+    'welcome_screen_content'
+  );
+}
+
+function welcome_screen_content() {
+  ?>
+  <div class="wrap">
+    <h2>Welcome to our SEO Pack</h2>
+
+    <p>
+    Thanks for installing All in One SEO. I hope you'll find it useful.
+    </p>
+  </div>
+  <?php
+}
+add_action( 'admin_head', 'welcome_screen_remove_menus' );
+function welcome_screen_remove_menus() {
+    remove_submenu_page( 'index.php', 'welcome-screen-about' );
+}
