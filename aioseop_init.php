@@ -333,3 +333,17 @@ function aioseop_install(){
 }
 }
 
+add_action('admin_footer', 'upgrade_links_style');
+    function upgrade_links_style() {
+             print '<style>
+                .proupgrade > a {
+						color: hsl(120, 100%, 25%);
+						font-size: 15px;
+				}
+            
+                .proupgrade > a:hover {
+                        text-decoration: underline;
+                }
+				</style>';
+    }
+
